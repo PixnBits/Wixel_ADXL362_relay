@@ -223,6 +223,21 @@ void spiService(void)
     	while(!txAvailableFunction()){}
 
     	txSendByteFunction('^');
+
+    	// USB format, so omit index 0
+    	txSendByteFunction(serialNumberStringDescriptor[1]);
+    	txSendByteFunction(serialNumberStringDescriptor[2]);
+    	txSendByteFunction(serialNumberStringDescriptor[3]);
+    	txSendByteFunction(serialNumberStringDescriptor[4]);
+    	txSendByteFunction(serialNumberStringDescriptor[5]);
+    	txSendByteFunction(serialNumberStringDescriptor[6]);
+    	txSendByteFunction(serialNumberStringDescriptor[7]);
+    	txSendByteFunction(serialNumberStringDescriptor[8]);
+    	txSendByteFunction(serialNumberStringDescriptor[9]);
+    	txSendByteFunction(serialNumberStringDescriptor[10]);
+    	txSendByteFunction(serialNumberStringDescriptor[11]);
+
+		txSendByteFunction('@');
     	hex[0] = hexDigit(spi_rxdata_x[1] & 0x0F);
 		hex[1] = hexDigit((spi_rxdata_x[1] & 0xF0) >> 4);
 		txSendByteFunction(hex[1]);
@@ -252,7 +267,7 @@ void spiService(void)
 		hex[1] = hexDigit((spi_rxdata_z[0] & 0xF0) >> 4);
 		txSendByteFunction(hex[1]);
 		txSendByteFunction(hex[0]);
-		txSendByteFunction('|');
+		txSendByteFunction('&');
     	txSendByteFunction(0x0D);
     	txSendByteFunction(0x0A);
     	//*/
